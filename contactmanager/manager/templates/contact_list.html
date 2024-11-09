@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact List</title>
+</head>
+<body>
+    <h2>Business Contacts</h2>
+    <form method="get">
+        <input type="text" name="search" placeholder="Search by name or email">
+        <button type="submit">Search</button>
+    </form>
+    <a href="{% url 'add_contact' %}">Add Contact</a>
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                {{ contact.name }} - {{ contact.email }} - {{ contact.phone_number }}
+                <a href="{% url 'send_contact_email' contact.id %}">Send Email</a>
+                <a href="{% url 'delete_contact' contact.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
