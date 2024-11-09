@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+</head>
+<body>
+    <h2>Your To-Do List</h2>
+    <a href="{% url 'add_task' %}">Add Task</a> |
+    <a href="?status=completed">Show Completed</a> |
+    <a href="?status=pending">Show Pending</a>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task.completed %}<strike>{% endif %}
+                {{ task.task }}
+                {% if task.completed %}</strike>{% endif %}
+                <a href="{% url 'mark_task' task.id %}">{{ 'Unmark' if task.completed else 'Mark as Completed' }}</a>
+                <a href="{% url 'delete_task' task.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
